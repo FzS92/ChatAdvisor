@@ -3,41 +3,29 @@ Process chat history and generate suggested answers using the OpenAI API.
 """
 
 import re
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 import gradio as gr
 import openai
 
-chat_history_sample = """Son, [sunday 1:02pm]
-Hey Mom, guess what? I scored the winning goal in today's soccer match!
 
-Mother, [sunday 1:03pm]
-Wow, that's amazing, sweetheart! I'm so proud of you. Tell me all about it!
+def read_string_from_file(file_path: str) -> Optional[str]:
+    """
+    Read the contents of a text file and return it as a string.
 
-Son, [sunday 1:09pm]
-Well, it was a tough game, but in the last few minutes, I managed to dribble past the defenders and kick the ball right into the net. The crowd went wild!
+    Args:
+        file_path (str): The path to the text file.
 
-Mother, [sunday 2pm]
-That's incredible, my talented soccer star! You've been practicing so hard, and it's paying off. Keep up the great work!
-
-Son, [sunday 2:00pm]
-Thanks, Mom! It's all thanks to your support and encouragement. I couldn't have done it without you cheering me on from the sidelines.
-
-Mother, [3:00]
-You're welcome, my dear. It brings me joy to see you enjoying the sport and achieving your goals. Remember, teamwork and perseverance are key in any game, on and off the field.
-
-Son, [another time]
-I'll keep that in mind, Mom. And speaking of teamwork, we're planning a team outing next weekend to celebrate our victory. Can we go to the amusement park?
-"""
-
-history_sample = """Son: Hey Mom, guess what? I scored the winning goal in today's soccer match!
-Mother: Wow, that's amazing, sweetheart! I'm so proud of you. Tell me all about it!
-Son: Well, it was a tough game, but in the last few minutes, I managed to dribble past the defenders and kick the ball right into the net. The crowd went wild!
-Mother: That's incredible, my talented soccer star! You've been practicing so hard, and it's paying off. Keep up the great work!
-Son: Thanks, Mom! It's all thanks to your support and encouragement. I couldn't have done it without you cheering me on from the sidelines.
-Mother: You're welcome, my dear. It brings me joy to see you enjoying the sport and achieving your goals. Remember, teamwork and perseverance are key in any game, on and off the field.
-Son: I'll keep that in mind, Mom. And speaking of teamwork, we're planning a team outing next weekend to celebrate our victory. Can we go to the amusement park?
-Mother:"""
+    Returns:
+        str or None: The string read from the file, or None if an error occurred.
+    """
+    try:
+        with open(file_path, "r", encoding="utf8") as file:
+            string = file.read().strip()
+        return string
+    except IOError:
+        print(f"Error: Failed to read the file '{file_path}'.")
+        return None
 
 
 def remove_bracketed_text(history: str) -> str:
@@ -80,6 +68,8 @@ def string_to_list(string: str) -> List[str]:
 
 
 # Inputs
+chat_history_sample = read_string_from_file("./chat_history_sample.txt")
+
 openai_key = gr.Textbox(type="password", label="OpenAI Key")
 chat_history = gr.Textbox(
     value=chat_history_sample, label="Paste your chat history here"
@@ -91,6 +81,8 @@ other_usernames = gr.Textbox(
 )
 
 # outputs
+history_sample = read_string_from_file("./history_sample.txt")
+
 previous_history = gr.Textbox(
     value=history_sample,
     label=(
