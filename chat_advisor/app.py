@@ -1,6 +1,12 @@
+"""
+Process chat history and generate suggested answers using the OpenAI API.
+"""
+
 import re
-import openai
+from typing import List, Tuple
+
 import gradio as gr
+import openai
 
 chat_history_sample = """Son, [sunday 1:02pm]
 Hey Mom, guess what? I scored the winning goal in today's soccer match!
@@ -34,21 +40,24 @@ Son: I'll keep that in mind, Mom. And speaking of teamwork, we're planning a tea
 Mother:"""
 
 
-# Delete everything inside []. This will also delete times in chat history
-def remove_bracketed_text(chat_history):
-    cleaned_text = re.sub(r"\[.*?\]", "", chat_history)
+def remove_bracketed_text(history: str) -> str:
+    """Removes text enclosed in square brackets from the chat history."""
+    cleaned_text = re.sub(r"\[.*?\]", "", history)
     return cleaned_text
 
 
-def remove_extra_newlines(string):
+def remove_extra_newlines(string: str) -> str:
+    """Removes extra newlines from a string."""
     return "\n".join(line for line in string.splitlines() if line.strip())
 
 
-def add_name(string, your_username):
-    return string + your_username + ":"
+def add_name(string: str, username: str) -> str:
+    """Adds the given username at the end of the string."""
+    return string + username + ":"
 
 
-def replace_comma_before_newline(input_text):
+def replace_comma_before_newline(input_text: str) -> str:
+    """Replaces a comma before a newline with a colon."""
     lines = input_text.split("\n")
     processed_lines = ""
 
@@ -63,8 +72,8 @@ def replace_comma_before_newline(input_text):
     return processed_lines
 
 
-# Stop words based on the other usernames
-def string_to_list(string):
+def string_to_list(string: str) -> List[str]:
+    """Converts a comma-separated string into a list of words."""
     word_list = string.split(",")  # Split the string by comma
     word_list = [word.strip() for word in word_list]  # Remove leading/trailing spaces
     return word_list
@@ -84,21 +93,30 @@ other_usernames = gr.Textbox(
 # outputs
 previous_history = gr.Textbox(
     value=history_sample,
-    label="We modify your chat history like this after you press submit (only for your reference!).",
+    label=(
+        "We modify your chat history like this after you press submit (only for your"
+        " reference!)."
+    ),
 )
-long_answer = gr.Textbox(value="Get your longer answer here", label="Long answer")
-short_answer = gr.Textbox(value="Get your shorter answer here", label="Shorter answer")
+longer_answer = gr.Textbox(value="Get your longer answer here", label="Long answer")
+shorter_answer = gr.Textbox(
+    value="Get your shorter answer here", label="Shorter answer"
+)
 
 
-def suggest_answer(openai_key, chat_history, your_username, other_usernames):
-    openai.api_key = openai_key
-    updated_history = chat_history
+def suggest_answer(
+    openaikey: str, history: str, your_usern: str, other_usern: str
+) -> Tuple[str, str, str]:
+    """Generates a suggested answer based on the given chat history
+    and user information using the OpenAI API."""
+    openai.api_key = openaikey
+    updated_history = history
     updated_history = remove_extra_newlines(updated_history)
     updated_history = remove_bracketed_text(updated_history)
     updated_history = replace_comma_before_newline(updated_history)
-    updated_history = add_name(updated_history, your_username)
+    updated_history = add_name(updated_history, your_usern)
 
-    other_usernames = string_to_list(other_usernames)
+    other_usern = string_to_list(other_usern)
 
     response = openai.Completion.create(
         model="text-davinci-003",
@@ -127,10 +145,11 @@ def suggest_answer(openai_key, chat_history, your_username, other_usernames):
     return updated_history, long_answer, short_answer
 
 
-iface = gr.Interface(
-    fn=suggest_answer,
-    inputs=[openai_key, chat_history, your_username, other_usernames],
-    outputs=[previous_history, long_answer, short_answer],
-)
-
-iface.launch(share=False)
+if __name__ == "__main__":
+    iface = gr.Interface(
+        title="Chat Advisor",
+        fn=suggest_answer,
+        inputs=[openai_key, chat_history, your_username, other_usernames],
+        outputs=[previous_history, longer_answer, shorter_answer],
+    )
+    iface.launch(share=False)
