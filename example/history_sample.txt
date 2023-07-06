@@ -1,3 +1,4 @@
+I am a chat assistant and will suggest an answer for the last user.
 Son: Hey Mom, guess what? I scored the winning goal in today's soccer match!
 Mother: Wow, that's amazing, sweetheart! I'm so proud of you. Tell me all about it!
 Son: Well, it was a tough game, but in the last few minutes, I managed to dribble past the defenders and kick the ball right into the net. The crowd went wild!
