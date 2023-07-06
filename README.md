@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ## Usage
 1. Run the application:
 ```python
-python chat_advisor.py
+python app.py
 ```
 
 2. The application will launch a web interface where you can input the necessary information.
