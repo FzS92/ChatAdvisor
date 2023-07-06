@@ -51,11 +51,6 @@ The application performs the following steps to generate the suggested answers:
 
 7. Display the modified chat history, the long answer, and the short answer in the web interface.
 
-## File Structure
-- **app.py**: The main Python script containing the application logic.
-- **chat_history_sample.txt**: A sample chat history text file for preview purposes.
-- **history_sample.txt**: A sample modified chat history text file for preview purposes.
-- **README.md**: This README file.
 ## HuggingFace Space
 The code for this project is also published on HuggingFace Space. You can access the web interface and try out the Chat Advisor by visiting the following link:
 
