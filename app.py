@@ -1,6 +1,12 @@
 """
-Process chat history and generate suggested answers using the OpenAI API.
+Chat Advisor
+
+This script provides a chat advising functionality by utilizing OpenAI.
+It allows users to input their chat history, OpenAI key, and usernames
+to receive suggested answers.
+The script utilizes the Gradio library for the user interface.
 """
+
 
 import gradio as gr
 

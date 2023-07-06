@@ -1,6 +1,5 @@
 """
-Generates a suggested answer based on the given chat history and user information
-using the OpenAI API.
+Process chat history and generate suggested answers using the OpenAI API
 
 Parameters:
 - openaikey (str): The API key for accessing the OpenAI API.
