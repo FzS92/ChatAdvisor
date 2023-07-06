@@ -36,23 +36,6 @@ python app.py
 
 ![App Screenshot](./screenshots/screenshot_app.png)
 
-## Functionality
-The application performs the following steps to generate the suggested answers:
-
-1. Read the chat history.
-
-2. Clean the chat history by removing square bracketed text and extra newlines.
-
-3. Add the username at the end of the chat history.
-
-4. Convert the other usernames into a list.
-
-5. Make an API call to the OpenAI Completion model to generate a long answer based on the modified chat history.
-
-6. Use the long answer as a prompt and make another API call to generate a shorter answer.
-
-7. Display the modified chat history, the long answer, and the short answer in the web interface.
-
 ## HuggingFace Space
 The code for this project is also published on HuggingFace Space. You can access the web interface and try out the Chat Advisor by visiting the following link:
 
