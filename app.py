@@ -68,31 +68,33 @@ def string_to_list(string: str) -> List[str]:
 
 
 # Inputs
-chat_history_sample = read_string_from_file("./chat_history_sample.txt")
+chat_history_sample = read_string_from_file("./example/chat_history_sample.txt")
 
-openai_key = gr.Textbox(type="password", label="OpenAI Key")
-chat_history = gr.Textbox(
-    value=chat_history_sample, label="Paste your chat history here"
+openai_key = gr.Textbox(
+    label="OpenAI Key", placeholder="Enter your OpenAI key", type="password"
 )
-your_username = gr.Textbox(value="Mother", label="I need an answer for this username")
+chat_history = gr.Textbox(
+    placeholder=chat_history_sample, label="Paste your chat history here"
+)
+your_username = gr.Textbox(placeholder="Mother", label="I need an answer for this username")
 other_usernames = gr.Textbox(
-    value="Son",
+    placeholder="Son",
     label="What are the other usernames in the pasted chat history? Separate by comma.",
 )
 
 # outputs
-history_sample = read_string_from_file("./history_sample.txt")
+history_sample = read_string_from_file("./example/history_sample.txt")
 
 previous_history = gr.Textbox(
-    value=history_sample,
+    placeholder=history_sample,
     label=(
         "We modify your chat history like this after you press submit (only for your"
         " reference!)."
     ),
 )
-longer_answer = gr.Textbox(value="Get your longer answer here", label="Long answer")
+longer_answer = gr.Textbox(placeholder="Get your longer answer here", label="Long answer")
 shorter_answer = gr.Textbox(
-    value="Get your shorter answer here", label="Shorter answer"
+    placeholder="Get your shorter answer here", label="Shorter answer"
 )
 
 
@@ -101,12 +103,14 @@ def suggest_answer(
 ) -> Tuple[str, str, str]:
     """Generates a suggested answer based on the given chat history
     and user information using the OpenAI API."""
+    print(openaikey)
     openai.api_key = openaikey
     updated_history = history
     updated_history = remove_extra_newlines(updated_history)
     updated_history = remove_bracketed_text(updated_history)
     updated_history = replace_comma_before_newline(updated_history)
     updated_history = add_name(updated_history, your_usern)
+    updated_history = str(updated_history)
 
     other_usern = string_to_list(other_usern)
 
