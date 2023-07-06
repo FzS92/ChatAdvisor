@@ -36,6 +36,10 @@ def suggest_answer(
     updated_history = remove_bracketed_text(updated_history)
     updated_history = replace_comma_before_newline(updated_history)
     updated_history = add_name(updated_history, your_usern)
+    updated_history = (
+        "I am a chat assistant and will suggest an answer for the last user.\n"
+        + updated_history
+    )
     other_usern = string_to_list(other_usern)
 
     updated_history = str(updated_history)
@@ -56,7 +60,8 @@ def suggest_answer(
 
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"{long_answer}\n\nTl;dr",
+        # prompt=f"{long_answer}\n\nTl;dr",
+        prompt=f"Make my answer shorter: {long_answer}",
         temperature=1,
         max_tokens=60,
         top_p=1.0,
@@ -65,4 +70,5 @@ def suggest_answer(
     )
 
     short_answer = response["choices"][0]["text"]
+    short_answer = remove_extra_newlines(short_answer)
     return updated_history, long_answer, short_answer

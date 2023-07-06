@@ -62,7 +62,7 @@ def test_add_name():
     string = "Hello"
     username = "John"
     result = add_name(string, username)
-    assert result == "HelloJohn:"
+    assert result == "Hello\nJohn:"
 
 
 def test_replace_comma_before_newline():

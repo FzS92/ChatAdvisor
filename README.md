@@ -34,6 +34,8 @@ python app.py
 
 5. The generated answers will be displayed in the web interface.
 
+![App Screenshot](./screenshots/screenshot_app.png)
+
 ## Functionality
 The application performs the following steps to generate the suggested answers:
 

@@ -38,7 +38,7 @@ def remove_extra_newlines(string: str) -> str:
 
 def add_name(string: str, username: str) -> str:
     """Adds the given username at the end of the string."""
-    return string + username + ":"
+    return string + "\n" + username + ":"
 
 
 def replace_comma_before_newline(input_text: str) -> str:
