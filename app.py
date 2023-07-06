@@ -110,9 +110,10 @@ def suggest_answer(
     updated_history = remove_bracketed_text(updated_history)
     updated_history = replace_comma_before_newline(updated_history)
     updated_history = add_name(updated_history, your_usern)
-    updated_history = str(updated_history)
-
     other_usern = string_to_list(other_usern)
+    
+    updated_history = str(updated_history)
+    other_usernames = str(other_usern)
 
     response = openai.Completion.create(
         model="text-davinci-003",
