@@ -46,17 +46,7 @@ def add_name(string: str, username: str) -> str:
 
 def replace_comma_before_newline(input_text: str) -> str:
     """Replaces a comma before a newline with a colon."""
-    lines = input_text.split("\n")
-    processed_lines = ""
-
-    for line in lines:
-        if line.endswith(","):
-            line = line[:-1] + ": "
-        elif line.endswith(", "):
-            line = line[:-2] + ": "
-        else:
-            line = line + "\n"
-        processed_lines += line
+    processed_lines = re.sub(r",\n|, \n", ": ", input_text)
     return processed_lines
 
 
@@ -76,7 +66,9 @@ openai_key = gr.Textbox(
 chat_history = gr.Textbox(
     placeholder=chat_history_sample, label="Paste your chat history here"
 )
-your_username = gr.Textbox(placeholder="Mother", label="I need an answer for this username")
+your_username = gr.Textbox(
+    placeholder="Mother", label="I need an answer for this username"
+)
 other_usernames = gr.Textbox(
     placeholder="Son",
     label="What are the other usernames in the pasted chat history? Separate by comma.",
@@ -92,7 +84,9 @@ previous_history = gr.Textbox(
         " reference!)."
     ),
 )
-longer_answer = gr.Textbox(placeholder="Get your longer answer here", label="Long answer")
+longer_answer = gr.Textbox(
+    placeholder="Get your longer answer here", label="Long answer"
+)
 shorter_answer = gr.Textbox(
     placeholder="Get your shorter answer here", label="Shorter answer"
 )
@@ -110,7 +104,7 @@ def suggest_answer(
     updated_history = replace_comma_before_newline(updated_history)
     updated_history = add_name(updated_history, your_usern)
     other_usern = string_to_list(other_usern)
-    
+
     updated_history = str(updated_history)
     other_usernames = str(other_usern)
 
