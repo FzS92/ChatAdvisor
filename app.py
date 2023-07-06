@@ -103,7 +103,6 @@ def suggest_answer(
 ) -> Tuple[str, str, str]:
     """Generates a suggested answer based on the given chat history
     and user information using the OpenAI API."""
-    print(openaikey)
     openai.api_key = openaikey
     updated_history = history
     updated_history = remove_extra_newlines(updated_history)
