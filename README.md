@@ -18,7 +18,7 @@ git clone https://github.com/FzS92/ChatAdvisor.git
 ```python
 pip install -r requirements.txt
 ```
-3. Obtain an OpenAI API key. You can sign up for an account and obtain the key from the OpenAI website.
+3. Obtain an OpenAI API key. You can sign up for an account and obtain the key from the [OpenAI website](https://platform.openai.com/account/billing/overview).
 
 ## Usage
 1. Run the application:
