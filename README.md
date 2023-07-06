@@ -52,7 +52,7 @@ The application performs the following steps to generate the suggested answers:
 7. Display the modified chat history, the long answer, and the short answer in the web interface.
 
 ## File Structure
-- **chat_advisor.py**: The main Python script containing the application logic.
+- **app.py**: The main Python script containing the application logic.
 - **chat_history_sample.txt**: A sample chat history text file for preview purposes.
 - **history_sample.txt**: A sample modified chat history text file for preview purposes.
 - **README.md**: This README file.
