@@ -16,6 +16,7 @@ The code for this project is also published on HuggingFace Space. You can access
 
 ```python
 git clone https://github.com/FzS92/ChatAdvisor.git
+cd ChatAdvisor
 ```
 
 2. Install the required dependencies:
