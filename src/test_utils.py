@@ -2,8 +2,6 @@
 This module contains unit tests for the functions in the 'utils' module.
 """
 
-import pytest
-
 from .utils import (
     add_name,
     read_string_from_file,
