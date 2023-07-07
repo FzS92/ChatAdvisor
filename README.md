@@ -1,4 +1,6 @@
 [![MITLicense](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
+[![Python application](https://github.com/FzS92/ChatAdvisor/actions/workflows/python-app.yml/badge.svg)](https://github.com/FzS92/ChatAdvisor/actions/workflows/python-app.yml)
+[![Python package](https://github.com/FzS92/ChatAdvisor/actions/workflows/python-package.yml/badge.svg)](https://github.com/FzS92/ChatAdvisor/actions/workflows/python-package.yml)
 
 # Chat Advisor
 This is a Python application that uses ChatGPT to generate suggested answers for a given chat history. It takes input in the form of a chat history and user information, and provides two types of answers: a longer answer and a shorter answer.
