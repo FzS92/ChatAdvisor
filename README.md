@@ -1,3 +1,5 @@
+[![MITLicense](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT)
+
 # Chat Advisor
 This is a Python application that uses ChatGPT to generate suggested answers for a given chat history. It takes input in the form of a chat history and user information, and provides two types of answers: a longer answer and a shorter answer.
 
@@ -40,12 +42,6 @@ python app.py
 The code for this project is also published on HuggingFace Space. You can access the web interface and try out the Chat Advisor by visiting the following link:
 
 [HuggingFace Space: Chat Advisor](https://huggingface.co/spaces/fzs/ChatAdvisor)
-
-## Contributing
-Contributions are welcome! If you find any issues or have suggestions for improvement, please open an issue or submit a pull request.
-
-## License
-This project is licensed under the [MIT License](https://rem.mit-license.org).
 
 ## Acknowledgments
 The application uses the [ChatGPT-OpenAI](https://openai.com/) API to generate suggested answers.
